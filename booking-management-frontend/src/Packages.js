@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
 function Packages() {
   const [packages, setPackages] = useState([]);
@@ -15,15 +16,30 @@ function Packages() {
   }, []);
 
   return (
-    <div>
-      <h2>Package List</h2>
-      <ul>
-        {packages.map(pkg => (
-          <li key={pkg.PackageID}>
-            {pkg.Name} - {pkg.Price} THB
-          </li>
-        ))}
-      </ul>
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Package List</h2>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Package Name</th>
+            <th>Price</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {packages.map((pkg, index) => (
+            <tr key={pkg.PackageID}>
+              <td>{index + 1}</td>
+              <td>{pkg.Name}</td>
+              <td>{pkg.Price} THB</td>
+              <td>{pkg.StartDate}</td>
+              <td>{pkg.EndDate}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 }
